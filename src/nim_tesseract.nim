@@ -121,12 +121,12 @@ proc imageToText*(path: string, datapath: Option[string] = none(string)): string
 
     echo "Len image data: ", len(image.data)
 
-    # tesseract.setImage(
-    #     imagedata = addr(image.data[0]), # https://github.com/Altabeh/tesseract-ocr-wrapper/blob/main/utils.py#L52
-    #     image.width,
-    #     image.height,
-    #     3 # cv2: image.depth. #TODO: Nim?
-    # )
+    tesseract.setImage(
+        imagedata = addr(image.data[0]), # https://github.com/Altabeh/tesseract-ocr-wrapper/blob/main/utils.py#L52
+        image.width,
+        image.height,
+        3 # cv2: image.depth. #TODO: Nim?
+    )
 
     return tesseract.getText()
     # finally:
