@@ -3,7 +3,9 @@
 # Nim Tesseract
 Nim Tesseract is a Nim wrapper for the [Tesseract](https://github.com/tesseract-ocr/tesseract/) OCR library, via its dynamic library.
 
-Development usage:
+### Development usage:
+Download trained data from https://github.com/tesseract-ocr/tessdata and put it into src folder
+
 ```bash
 $ cd src
 $ TESSDATA_PREFIX=$(pwd) nim r -d:pixieUseStb nim_tesseract.nim
