@@ -9,6 +9,8 @@ $ cd src
 $ TESSDATA_PREFIX=$(pwd) nim r -d:pixieUseStb nim_tesseract.nim
 ```
 
+`capi.h` reference: https://github.com/tesseract-ocr/tesseract/blob/main/include/tesseract/capi.h
+
 #TODO
  - Working library
  -  - Recognize text
