@@ -2,6 +2,6 @@
     "nim.buildOnSave": false,
     "nim.buildCommand": "c",
     "nim.lintOnSave": true,
-    "nim.project": ["./src/nim_tesseract.nim"],
+    "nim.project": ["./src/nimtesseract.nim"],
     "nim.licenseString": ""
 }
