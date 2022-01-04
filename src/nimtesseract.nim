@@ -1,5 +1,5 @@
 import pixie
-import std/[os, json, options]
+import std/[os, json]
 
 
 const pattern* = "(|lib)tesseract(|.so|.dll|.dylib)"
@@ -22,23 +22,17 @@ proc TessBaseAPIGetUTF8Text*(handle: TessBaseAPI): cstring {.importc, dynlib: pa
 # proc TessBaseAPI*() {.importc, dynlib: pattern.}
 
 
-proc initTesseract*(language: Option[string] = some "eng", datapath: Option[string] = none(string)): Tesseract =
+proc initTesseract*(language: string = "eng", datapath: string = ""): Tesseract =
     result.handle = TessBaseAPICreate()
 
     var
-        languageParam: cstring
-        datapathParam: cstring
-
-    if language.isSome():
-        languageParam = cstring(language.get())
-
-    if datapath.isSome():
-        datapathParam = cstring(datapath.get())
+        language: cstring = cstring(language)
+        datapath: cstring = cstring(datapath)
 
     let status = TessBaseAPIInit3(
         handle = result.handle,
-        datapath = datapathParam,
-        language = languageParam,
+        datapath = datapath,
+        language = language,
     )
     if int(status) == -1:
         raise newException(TesseractError, "Couldn't initialize tesseract")
@@ -63,14 +57,14 @@ proc setVariable*(self: Tesseract, name, value: string): bool =
     )
 
 
-proc setImage*(self: Tesseract, imagedata: pointer, width, height, bytesPerPixel: int, bytesPerLine: Option[int] = none(int)) =
+proc setImage*(self: Tesseract, imagedata: pointer, width, height, bytesPerPixel: int, bytesPerLine: int = 0) =
     var
         # imagedata: cstring = cstring(imagedata)
         width: cint = cint(width)
         height: cint = cint(height)
         bytesPerPixel: cint = cint(bytesPerPixel)
 
-        bytesPerLine: cint = if bytesPerLine.isSome: cint(bytesPerLine.get())
+        bytesPerLine: cint = if bytesPerLine != 0: cint(bytesPerLine)
             else: width * bytesPerPixel
 
     TessBaseAPISetImage(
@@ -91,7 +85,7 @@ proc getText*(self: Tesseract): string =
     return $TessBaseAPIGetUTF8Text(handle = self.handle)
 
 
-proc imageToText*(path: string, language: Option[string] = some "eng", datapath: Option[string] = none(string), ppi: int = 70): string =
+proc imageToText*(path: string, language: string = "eng", datapath: string = "", ppi: int = 70): string =
     if not fileExists(path):
         raise newException(TesseractError, "File not found: " & escapeJson(path))
 

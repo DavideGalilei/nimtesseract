@@ -1,4 +1,4 @@
-import std/[os, unittest, options, strformat]
+import std/[os, unittest, strformat]
 
 import nimtesseract
 
@@ -13,8 +13,8 @@ test "Recognize text":
     putEnv("TESSDATA_PREFIX", currentSourcePath.parentDir)
 
     var tess = initTesseract(
-        language = some "eng",
-        # datapath = some "eng", # none(string)
+        language = "eng",
+        # datapath = "",
     )
 
     # https://commons.wikimedia.org/wiki/File:Example_01.png
