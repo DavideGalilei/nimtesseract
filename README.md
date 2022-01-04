@@ -1,4 +1,4 @@
-<center><h1>Nim Tesseract 👑👁</h1></center>
+<div align="center"><h1>Nim Tesseract 👑👁</h1></div>
 
 ![banner](/assets/banner.jpg)
 Nim Tesseract is a Nim wrapper for the [Tesseract](https://github.com/tesseract-ocr/tesseract/) OCR library, via its dynamic library.
