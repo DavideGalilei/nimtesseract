@@ -1,10 +1,11 @@
-# Nim Tesseract 👑👁
+<center><h1>Nim Tesseract 👑👁</h1></center>
+
 ![banner](/assets/banner.jpg)
 Nim Tesseract is a Nim wrapper for the [Tesseract](https://github.com/tesseract-ocr/tesseract/) OCR library, via its dynamic library.
 
 ## Installation 👇
 ```bash
-$ nimble install https://github.com/DavideGalilei/nimtesseract
+$ nimble install nimtesseract
 ```
 
 ## Usage 🌷
