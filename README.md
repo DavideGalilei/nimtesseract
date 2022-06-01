@@ -14,6 +14,12 @@ E.g. for Arch Linux (from AUR):
 ```bash
 $ yay -Sy tesseract
 ```
+
+for macOS:
+```bash
+$ brew install tesseract
+```
+
 2. Download trained data from https://github.com/tesseract-ocr/tessdata or https://github.com/tesseract-ocr/tessdata_fast
 3. Done ✅
 
