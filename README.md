@@ -9,10 +9,10 @@ $ nimble install nimtesseract
 ```
 
 ## Usage 🌷
-1. Install (lib)tesseract via your packet manager or put the tesseract so/dll/dylib file in the project directory
-E.g. for Arch Linux (from AUR):
+1. Install (lib)tesseract via your packege manager or put the tesseract so/dll/dylib file in the project directory
+E.g. for Arch Linux:
 ```bash
-$ yay -Sy tesseract
+$ pacman -Sy tesseract
 ```
 
 for macOS:
