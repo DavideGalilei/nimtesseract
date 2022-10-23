@@ -9,7 +9,7 @@ $ nimble install nimtesseract
 ```
 
 ## Usage 🌷
-1. Install (lib)tesseract via your packege manager or put the tesseract so/dll/dylib file in the project directory
+1. Install (lib)tesseract via your package manager or put the tesseract so/dll/dylib file in the project directory
 E.g. for Arch Linux:
 ```bash
 $ pacman -Sy tesseract
