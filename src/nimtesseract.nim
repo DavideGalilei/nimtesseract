@@ -1,6 +1,7 @@
 import pixie
 import std/[os, json]
 
+{.passL: "-Wl,-rpath,/opt/homebrew/lib".}
 
 const pattern* = "(|lib)tesseract(|.so|.dll|.dylib)"
 
@@ -19,6 +20,8 @@ proc TessBaseAPISetVariable*(handle: TessBaseAPI, name, value: cstring): bool {.
 proc TessBaseAPISetImage*(handle: TessBaseAPI, imagedata: pointer, width, height, bytes_per_pixel, bytes_per_line: cint) {.importc, dynlib: pattern.}
 proc TessBaseAPISetSourceResolution*(handle: TessBaseAPI, ppi: cint) {.importc, dynlib: pattern.}
 proc TessBaseAPIGetUTF8Text*(handle: TessBaseAPI): cstring {.importc, dynlib: pattern.}
+proc TessBaseAPIGetHOCRText*(handle: TessBaseAPI, page: cint): cstring {.importc, dynlib: pattern.}
+proc TessBaseAPIGetAltoText*(handle: TessBaseAPI, page: cint): cstring {.importc, dynlib: pattern.}
 # proc TessBaseAPI*() {.importc, dynlib: pattern.}
 
 
@@ -77,12 +80,18 @@ proc setImage*(self: Tesseract, imagedata: pointer, width, height, bytesPerPixel
     )
 
 
-proc setSourceResolution(self: Tesseract, ppi: int) =
+proc setSourceResolution*(self: Tesseract, ppi: int) =
     TessBaseAPISetSourceResolution(self.handle, cint(ppi))
 
 
 proc getText*(self: Tesseract): string =
     return $TessBaseAPIGetUTF8Text(handle = self.handle)
+
+proc getHOCRText*(self: Tesseract, page: int = 0): string =
+    return $TessBaseAPIGetHOCRText(handle = self.handle, page = cint(page))
+
+proc getAltoText*(self: Tesseract, page: int = 0): string =
+    return $TessBaseAPIGetAltoText(handle = self.handle, page = cint(page))
 
 
 proc imageToText*(path: string, language: string = "eng", datapath: string = "", ppi: int = 70): string =
